@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  exchangeservice:
+    image:  ${DOCKER_REGISTRY-}exchangeservice
+    environment:
+      ConnectionStrings__DbConnection: "Host=host.docker.internal;Port=5432;Database=ExchangeService;Username=postgres;Password=admin"
+    build:
+      context: ./ExchangeService
+      dockerfile: ExchangeService/Dockerfile
+    ports:
+      - "7124:443"
+      - "7123:80"
+
+  telegrambotexchange:
+    image:  ${DOCKER_REGISTRY-}telegrambotexchange
+    environment:
+      ExchangeService__Url: "http://host.docker.internal:7123/"
+      ExchangeService__SkipElement: 5
+      TelegramOptions__Token: "token"
+      TelegramOptions__ThrowPendingUpdates: "false"
+      ConnectionStrings__DefaultConnection: "Host=host.docker.internal;Port=5432;Database=TgBotExchangeService;Username=postgres;Password=admin"
+    build:
+      context: ./TelegramBotExchange
+      dockerfile: TelegramBotExchange/Dockerfile
