@@ -17,7 +17,7 @@ services:
     environment:
       ExchangeService__Url: "http://host.docker.internal:7123/"
       ExchangeService__SkipElement: 5
-      TelegramOptions__Token: "token"
+      TelegramOptions__Token: "6773164670:AAG3DBD6tcuTyvpXeo2Wft2a3DhJCK4qX30"
       TelegramOptions__ThrowPendingUpdates: "false"
       ConnectionStrings__DefaultConnection: "Host=host.docker.internal;Port=5432;Database=TgBotExchangeService;Username=postgres;Password=admin"
     build:
